@@ -17,9 +17,10 @@ public class ThrowProjectile : MonoBehaviour
     private GameObject Shoot()
     {
         Vector3 projectilePosition = firePoint.position;
-        GameObject projectile = Instantiate(projectilePrefab, this.transform.position, firePoint.rotation);
-        Rigidbody rb = projectile.GetComponent<Rigidbody>();
-        rb.AddForce(projectilePosition * projectileForce, ForceMode.Impulse);
+        GameObject projectile = Instantiate(projectilePrefab, projectilePosition, firePoint.rotation);
+        Vector3 projectileDirection = firePoint.forward;
+        projectile.GetComponent<Rigidbody>().AddForce(projectileDirection * projectileForce, ForceMode.Impulse);
+        
         return projectile;
     }
     IEnumerator Cooldown()
